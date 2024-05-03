@@ -54,16 +54,27 @@ public class BarberService {
     public Barber updateBarber(BarberUpdateDTO barberUpdateDTO) {
         Long id = barberUpdateDTO.id();
 
-        if(!barberRepository.existsById(id)) {
-            throw new BarberException("Barber not foundddd");
-        } else {
-            Barber barber = new Barber();
-            barber.setName(barberUpdateDTO.name());
-            barber.setAddress(barberUpdateDTO.address());
-            barber.setWorkSchedule(barberUpdateDTO.workSchedule());
-            barber.setPhone(barberUpdateDTO.phone());
+        Barber existsBarber = barberRepository.findById(id)
+                .orElseThrow(() -> new BarberException("Barber not found"));
 
-            return barberRepository.save(barber);
+        if (barberUpdateDTO.name() != null) {
+            existsBarber.setName(barberUpdateDTO.name());
         }
+        if (barberUpdateDTO.address()!= null) {
+            existsBarber.setAddress(barberUpdateDTO.address());
+        }
+        if (barberUpdateDTO.workSchedule()!= null) {
+            existsBarber.setWorkSchedule(barberUpdateDTO.workSchedule());
+        }
+        if (barberUpdateDTO.phone()!= null) {
+            existsBarber.setPhone(barberUpdateDTO.phone());
+        }
+        return barberRepository.save(existsBarber);
+    }
+
+    public void deleteBarberById(Long id) {
+        Barber existsBarber = barberRepository.findById(id)
+                .orElseThrow(() -> new BarberException("Barber not found"));
+        barberRepository.delete(existsBarber);
     }
 }

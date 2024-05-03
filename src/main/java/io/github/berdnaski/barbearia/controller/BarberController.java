@@ -40,8 +40,15 @@ public class BarberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Barber> updateBarber(@PathVariable Long id, BarberUpdateDTO barberUpdateDTO) {
+    public ResponseEntity<Barber> updateBarber(@PathVariable Long id, @RequestBody BarberUpdateDTO barberUpdateDTO) {
+        barberUpdateDTO = new BarberUpdateDTO(id, barberUpdateDTO.name(), barberUpdateDTO.address(), barberUpdateDTO.workSchedule(), barberUpdateDTO.phone());
         Barber barber = barberService.updateBarber(barberUpdateDTO);
         return ResponseEntity.ok(barber);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBarberById(@PathVariable Long id) {
+        barberService.deleteBarberById(id);
+        return ResponseEntity.notFound().build();
     }
 }
