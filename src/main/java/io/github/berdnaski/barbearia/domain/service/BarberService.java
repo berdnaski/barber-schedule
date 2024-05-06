@@ -71,7 +71,6 @@ public class BarberService {
         }
         return barberRepository.save(existsBarber);
     }
-
     public void deleteBarberById(Long id) {
         Barber existsBarber = barberRepository.findById(id)
                 .orElseThrow(() -> new BarberException("Barber not found"));

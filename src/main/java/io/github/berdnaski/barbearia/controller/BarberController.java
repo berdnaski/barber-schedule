@@ -49,6 +49,6 @@ public class BarberController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBarberById(@PathVariable Long id) {
         barberService.deleteBarberById(id);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 }

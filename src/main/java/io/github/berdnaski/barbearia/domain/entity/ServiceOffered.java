@@ -16,9 +16,6 @@ public class ServiceOffered {
     @Column(name = "id_service_offered")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "description")
     private String description;
 
@@ -28,4 +25,10 @@ public class ServiceOffered {
     @ManyToOne
     @JoinColumn(name = "barber_id", referencedColumnName = "id_barber")
     private Barber barber;
+
+    public ServiceOffered(String price, String description, Barber barber) {
+        this.price = Double.valueOf(price);
+        this.description = description;
+        this.barber = barber;
+    }
 }

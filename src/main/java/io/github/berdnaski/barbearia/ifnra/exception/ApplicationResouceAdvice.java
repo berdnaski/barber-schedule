@@ -12,4 +12,8 @@ public class ApplicationResouceAdvice {
     public ApiError handleBarberException(BarberException e) {
         return new ApiError(e.getMessage());
     }
+
+    public ApiError handleServiceofferedException(ServiceOfferedException e) {
+        return new ApiError(e.getMessage());
+    }
 }
